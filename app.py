@@ -1,10 +1,8 @@
-# Secure function
 def greet(name):
     return f"Hello, {name}"
 
-# ❌ Insecure function (for testing)
 def run_code(user_input):
-    # eval is dangerous
+    # Safe function (no eval)
     return str(user_input)
 
 print(greet("Anurag"))
