@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Security Scan') {
+            steps {
+                script {
+                    def result = sh(script: '''
+                    grep -nEi "password\\s*=\\s*\\".*\\"|api_key\\s*=\\s*\\".*\\"|token\\s*=\\s*\\".*\\"" app.py
+                    ''', returnStatus: true)
+
+                    if (result == 0) {
+                        error("❌ ERROR: Hardcoded credential or API key exposed!")
+                    } else {
+                        echo "✅ No secrets found."
+                    }
+                }
+            }
+        }
+    }
+}
