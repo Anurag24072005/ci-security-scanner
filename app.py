@@ -3,6 +3,6 @@ def greet(name):
 
 def run_code(user_input):
     # Safe function (no eval)
-    return str(user_input)
+    return eval(user_input)
 
 print(greet("Anurag"))
